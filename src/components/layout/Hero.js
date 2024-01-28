@@ -3,14 +3,14 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="hero">
+    <section className="hero mt-4">
         <div className="py-12">
         <h1 className="text-4xl font-semibold">Everything<br /> is better<br /> with a&nbsp;
-        <span className="text-primary"> Pizza
+        <span className="text-primary">Pizza
         </span>
         </h1>
-        <p className="my-4 text-gray-500 text-sm">
-            Pizza is the missing piece that makes everyday complete, a simple yet delicious joy in life.
+        <p className="my-6 text-gray-500 text-sm">
+        Pizza completes every day with its simple yet delightful joy.
         </p>
             <div className="flex gap-4 text-sm">
                 <button  className="bg-primary uppercase flex items-center gap-2 text-white px-4 py-2 rounded-full">
