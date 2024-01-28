@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 
 export default function Header() {
@@ -13,9 +14,9 @@ export default function Header() {
           </nav>
           <nav className="flex items-center gap-4 text-gray-500,font-semibold">
           <Link href={'/login'}>Login</Link>
-          <Link href={'/Register'} className="bg-primary rounded-full text-white px-4 py-2">
-            Register
-           </Link>   
+          <Link href={'/register'} className="bg-primary rounded-full text-white px-4 py-2">
+     Register
+   </Link> 
           </nav>
         </header>
     );
