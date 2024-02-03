@@ -22,10 +22,7 @@ const TestimonialSlider = () => {
     <Slider {...settings}>
       <div>
         <p className="review__text">
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-          atque, quam minus totam maiores laborum! Impedit consectetur illum
-          aliquid odit. Odit dolore ipsum quod debitis nostrum necessitatibus
-          quis dolorem quas!"
+          "TasteTerra Pizza is a gastronomic delight! Each slice is a revelation of flavors that tantalize the taste buds. The commitment to excellence is evident in every bite. Truly an exceptional culinary experience!!"
         </p>
         <div className=" slider__content d-flex align-items-center gap-3 ">
           <img src={ava01} alt="avatar" className=" rounded" />
@@ -34,10 +31,7 @@ const TestimonialSlider = () => {
       </div>
       <div>
         <p className="review__text">
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-          atque, quam minus totam maiores laborum! Impedit consectetur illum
-          aliquid odit. Odit dolore ipsum quod debitis nostrum necessitatibus
-          quis dolorem quas!"
+          "TasteTerra Pizza is a taste sensation! From the first bite to the last, the flavors dance on the palate. The quality and dedication to perfection are unmatched. A pizza experience like no other!!"
         </p>
         <div className="slider__content d-flex align-items-center gap-3 ">
           <img src={ava02} alt="avatar" className=" rounded" />
@@ -46,10 +40,7 @@ const TestimonialSlider = () => {
       </div>
       <div>
         <p className="review__text">
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-          atque, quam minus totam maiores laborum! Impedit consectetur illum
-          aliquid odit. Odit dolore ipsum quod debitis nostrum necessitatibus
-          quis dolorem quas!"
+          "I'm a pizza enthusiast, and TasteTerra exceeds all expectations. The perfect blend of ingredients and meticulous preparation make each pizza a masterpiece. An absolute must-try for pizza lovers!"
         </p>
         <div className="slider__content d-flex align-items-center gap-3 ">
           <img src={ava03} alt="avatar" className=" rounded" />

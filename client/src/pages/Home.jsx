@@ -318,9 +318,7 @@ const Home = () => {
                   What our <span>customers</span> are saying
                 </h2>
                 <p className="testimonial__desc">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Distinctio quasi qui minus quos sit perspiciatis inventore
-                  quis provident placeat fugiat!
+                TasteTerra Pizza is a culinary masterpiece! Every bite is a journey of flavors, and their commitment to quality is truly remarkable. A taste that lingers, an experience that delights!
                 </p>
 
                 <TestimonialSlider />
