@@ -94,7 +94,7 @@ const FoodDetails = () => {
                 <h2 className="product__title mb-3">{title}</h2>
                 <p className="product__price">
                   {" "}
-                  Price: <span>${price}</span>
+                  Price: <span>Rs{price}</span>
                 </p>
                 <p className="category mb-5">
                   Category: <span>{category}</span>
@@ -129,20 +129,20 @@ const FoodDetails = () => {
               ) : (
                 <div className="tab__form mb-3">
                   <div className="review pt-5">
-                    <p className="user__name mb-0">Jhon Doe</p>
-                    <p className="user__email">jhon1@gmail.com</p>
+                    <p className="user__name mb-0">Alice Johnson</p>
+                    <p className="user__email">alice.johnson@gmail.com</p>
                     <p className="feedback__text">great product</p>
                   </div>
 
                   <div className="review">
-                    <p className="user__name mb-0">Jhon Doe</p>
-                    <p className="user__email">jhon1@gmail.com</p>
+                    <p className="user__name mb-0"> Brian Thompson</p>
+                    <p className="user__email"> brian.thompson@gmail.com</p>
                     <p className="feedback__text">great product</p>
                   </div>
 
                   <div className="review">
-                    <p className="user__name mb-0">Jhon Doe</p>
-                    <p className="user__email">jhon1@gmail.com</p>
+                    <p className="user__name mb-0">Olivia Davis</p>
+                    <p className="user__email">olivia.davis@gmail.com</p>
                     <p className="feedback__text">great product</p>
                   </div>
                   <form className="form" onSubmit={submitHandler}>

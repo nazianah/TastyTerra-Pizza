@@ -14,15 +14,15 @@ const Checkout = () => {
   const [enterCity, setEnterCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
 
-  const DeliveryInfo = [];
+  const shippingInfo = [];
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
-  const DeliveryCost = 0;
+  const shippingCost = 30;
 
-  const totalAmount = cartTotalAmount + Number(DeliveryCost);
+  const totalAmount = cartTotalAmount + Number(shippingCost);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const userDeliveryAddress = {
+    const userShippingAddress = {
       name: enterName,
       email: enterEmail,
       phone: enterNumber,
@@ -31,8 +31,8 @@ const Checkout = () => {
       postalCode: postalCode,
     };
 
-    DeliveryInfo.push(userDeliveryAddress);
-    console.log(DeliveryInfo);
+    shippingInfo.push(userShippingAddress);
+    console.log(shippingInfo);
   };
 
   return (
@@ -42,7 +42,7 @@ const Checkout = () => {
         <Container>
           <Row>
             <Col lg="8" md="6">
-              <h6 className="mb-4">Delivery Address</h6>
+              <h6 className="mb-4">Shipping Address</h6>
               <form className="checkout__form" onSubmit={submitHandler}>
                 <div className="form__group">
                   <input
@@ -102,14 +102,14 @@ const Checkout = () => {
             <Col lg="4" md="6">
               <div className="checkout__bill">
                 <h6 className="d-flex align-items-center justify-content-between mb-3">
-                  Subtotal: <span>${cartTotalAmount}</span>
+                  Subtotal: <span>Rs{cartTotalAmount}</span>
                 </h6>
                 <h6 className="d-flex align-items-center justify-content-between mb-3">
-                  Delivery: <span>${DeliveryCost}</span>
+                  Shipping: <span>Rs{shippingCost}</span>
                 </h6>
                 <div className="checkout__total">
                   <h5 className="d-flex align-items-center justify-content-between">
-                    Total: <span>${totalAmount}</span>
+                    Total: <span>Rs{totalAmount}</span>
                   </h5>
                 </div>
               </div>
