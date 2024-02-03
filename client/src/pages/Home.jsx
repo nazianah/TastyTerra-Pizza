@@ -82,13 +82,13 @@ const Home = () => {
       setAllProducts(filteredProducts);
     }
 
-    if (category === "BREAD") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Bread"
-      );
+    // if (category === "BREAD") {
+    //   const filteredProducts = products.filter(
+    //     (item) => item.category === "Bread"
+    //   );
 
-      setAllProducts(filteredProducts);
-    }
+    //   setAllProducts(filteredProducts);
+    // }
   }, [category]);
 
   return (
@@ -219,7 +219,7 @@ const Home = () => {
                   Pizza
                 </button>
 
-                <button
+                {/* <button
                   className={`d-flex align-items-center gap-2 ${
                     category === "BREAD" ? "foodBtnActive" : ""
                   } `}
@@ -227,7 +227,7 @@ const Home = () => {
                 >
                   <img src={foodCategoryImg03} alt="" />
                   Bread
-                </button>
+                </button> */}
               </div>
             </Col>
 
