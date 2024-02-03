@@ -46,16 +46,16 @@ const Dashboard = () => {
                 <h1>Welcome, {user.name}!</h1>
             ) : (
                 <>
-                    <button onClick={handleSignUp}>Sign Up</button>
+                    <button onClick={handleSignUp} style={{ marginRight: '10px' }}>Sign Up</button>
                     <button onClick={handleSignIn}>Sign In</button>
                 </>
             )}
             {/* Render other components based on the user's authentication status */}
             {user && (
-                <button onClick={handleSignOut}>Sign Out</button>
+                <button onClick={handleSignOut} style={{ marginTop: '10px' }}>Sign Out</button>
             )}
         </div>
-    );
-};
 
+    );
+}
 export default Dashboard;
