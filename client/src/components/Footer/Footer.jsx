@@ -67,24 +67,23 @@ const Footer = () => {
             <div className="social__links d-flex align-items-center gap-4 justify-content-end">
               <p className="m-0">Follow: </p>
               <span>
-                <Link to="https://github.com/Ayushi2003">
-                  <i class="ri-github-line"></i>
-                </Link>
-              </span>
+  <a href="https://github.com/nazianah" target="_blank">
+    <i class="ri-github-line"></i>
+  </a>
+</span>
 
-              <span>
-                {" "}
-                <Link to="https://instagram.com/_ayushibansal?r=nametag">
-                  <i class="ri-instagram-line"></i>
-                </Link>{" "}
-              </span>
+<span>
+  <a href="https://www.instagram.com/nazstarrx/" target="_blank">
+    <i class="ri-instagram-line"></i>
+  </a>
+</span>
 
-              <span>
-                {" "}
-                <Link to="https://www.linkedin.com/in/ayushi-bansal-22jan2003/">
-                  <i class="ri-linkedin-line"></i>
-                </Link>{" "}
-              </span>
+<span>
+  <a href="https://www.linkedin.com/in/nazianah-jhakri-583123200/" target="_blank">
+    <i class="ri-linkedin-line"></i>
+  </a>
+</span>
+
             </div>
           </Col>
         </Row>
