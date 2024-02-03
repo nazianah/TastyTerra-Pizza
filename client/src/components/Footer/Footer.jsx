@@ -15,10 +15,8 @@ const Footer = () => {
             <div className=" footer__logo text-start">
               <img src={logo} alt="logo" />
               <h5>TastyTerra-Pizza</h5>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt pariatur accusamus
-              </p>
+              <p>Discover the epitome of pizza perfection at TasteTerra – a symphony of premium ingredients harmoniously baked to create a slice of culinary heaven.</p>
+
             </div>
           </Col>
 
@@ -38,14 +36,14 @@ const Footer = () => {
             <h5 className="footer__title">Contact</h5>
             <ListGroup className="deliver__time-list">
               <ListGroupItem className=" delivery__time-item border-0 ps-0">
-                <p>Location: 4562-B, Mohali, Chandigarh, India</p>
+                <p>Location: Port-louis, Mauritius</p>
               </ListGroupItem>
               <ListGroupItem className=" delivery__time-item border-0 ps-0">
-                <span>Phone: 9834526781</span>
+                <span>Phone:+230 58283433</span>
               </ListGroupItem>
 
               <ListGroupItem className=" delivery__time-item border-0 ps-0">
-                <span>Email: tastytreat@gmail.com</span>
+                <span>Email: nazianah.umme@gmail.com</span>
               </ListGroupItem>
             </ListGroup>
           </Col>

@@ -34,18 +34,18 @@ const featureData = [
   {
     title: "Quick Delivery",
     imgUrl: featureImg01,
-    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
+    desc: "Savor the flavors without the wait. Our quick and efficient delivery ensures that your delicious pizza reaches your doorstep hot and fresh, right on time.",
   },
 
   {
     title: "Super Dine In",
     imgUrl: featureImg02,
-    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
+    desc: "Immerse yourself in a cozy atmosphere at our dine-in locations. Experience the joy of sharing delectable pizzas with family and friends in a vibrant setting.",
   },
   {
     title: "Easy Pick Up",
     imgUrl: featureImg03,
-    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
+    desc: "For those on the move, enjoy the convenience of easy pick-up options. Grab your favorite pizza effortlessly and relish the taste wherever your journey takes you.",
   },
 ];
 
@@ -104,10 +104,8 @@ const Home = () => {
                   <span> your door</span>
                 </h1>
 
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui
-                  magni delectus tenetur autem, sint veritatis!
-                </p>
+                <p>Craving something delicious? Order now and have mouthwatering dishes delivered right to your doorstep.</p>
+<p>Experience the convenience and joy of hassle-free dining at your fingertips.</p>
 
                 <div className="hero__btns d-flex align-items-center gap-5 mt-4">
                   <button className="order__btn d-flex align-items-center justify-content-between">
@@ -160,12 +158,10 @@ const Home = () => {
                 we will <span>take care</span>
               </h2>
               <p className="mb-1 mt-4 feature__text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor,
-                officiis?
+              Discover the magic of TasteTerra Pizza from the comfort of your home. Unparalleled flavors and culinary excellence delivered to your doorstep.
               </p>
               <p className="feature__text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Aperiam, eius.{" "}
+              A promise of quality, a symphony of taste - because every pizza deserves to be an experience
               </p>
             </Col>
 
@@ -257,10 +253,7 @@ const Home = () => {
                   Why <span>TastyTerra-Pizza?</span>
                 </h2>
                 <p className="tasty__treat-desc">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Dolorum, minus. Tempora reprehenderit a corporis velit,
-                  laboriosam vitae ullam, repellat illo sequi odio esse iste
-                  fugiat dolor, optio incidunt eligendi deleniti!
+                Embark on a culinary journey with TasteTerra Pizza, where passion meets perfection. Indulge in a symphony of flavors crafted from the finest ingredients, promising an unforgettable dining experience that transcends the ordinary!
                 </p>
 
                 <ListGroup className="mt-4">
@@ -270,8 +263,7 @@ const Home = () => {
                       foods
                     </p>
                     <p className="choose__us-desc">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Quia, voluptatibus.
+                    Savor the delight of each bite as our expert chefs meticulously prepare pizzas with the freshest and tastiest ingredients, ensuring a burst of flavor in every mouthful.
                     </p>
                   </ListGroupItem>
 
@@ -280,8 +272,7 @@ const Home = () => {
                       <i class="ri-checkbox-circle-line"></i> Quality support
                     </p>
                     <p className="choose__us-desc">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Qui, earum.
+                    At TasteTerra, we prioritize your satisfaction. Our dedicated support team is committed to ensuring that every aspect of your dining experience meets the highest standards of quality and excellence.
                     </p>
                   </ListGroupItem>
 
@@ -291,8 +282,7 @@ const Home = () => {
                       location{" "}
                     </p>
                     <p className="choose__us-desc">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Qui, earum.
+                    Enjoy the convenience of ordering from anywhere. Whether you're at home, work, or on the go, TasteTerra Pizza brings the delectable taste to your doorstep, making every location a perfect place for a pizza feast.
                     </p>
                   </ListGroupItem>
                 </ListGroup>
