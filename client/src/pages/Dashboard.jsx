@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react';
 import userContext, { UserContextProvider } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
@@ -46,13 +45,13 @@ const Dashboard = () => {
                 <h1>Welcome, {user.name}!</h1>
             ) : (
                 <>
-                    <button onClick={handleSignUp} style={{ marginRight: '10px' }}>Sign Up</button>
-                    <button onClick={handleSignIn}>Sign In</button>
+                    <button onClick={handleSignUp} style={{ marginRight: '10px', backgroundColor: 'blue', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Sign Up</button>
+                    <button onClick={handleSignIn} style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Sign In</button>
                 </>
             )}
             {/* Render other components based on the user's authentication status */}
             {user && (
-                <button onClick={handleSignOut} style={{ marginTop: '10px' }}>Sign Out</button>
+                <button onClick={handleSignOut} style={{ marginTop: '10px', backgroundColor: 'red', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Sign Out</button>
             )}
         </div>
 
