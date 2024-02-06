@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer } from "@react-google-maps/api";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
 
@@ -14,12 +14,12 @@ const Checkout = () => {
   const [enterCountry, setEnterCountry] = useState("");
   const [enterCity, setEnterCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [directions, setDirections] = useState(null);
   const [location, setLocation] = useState({ lat: -20.158889, lng: 57.48083 });
 
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const DeliveryCost = 30;
   const totalAmount = cartTotalAmount + Number(DeliveryCost);
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -38,7 +38,7 @@ const Checkout = () => {
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
         address
-      )}&key=AIzaSyDZAxPXhYG7BlyJ7tzqUU0GcxTYdQ7f4fc`
+      )}&key=AIzaSyAzgNyVeIW1BAVRmpAKUsiDjDuLt9grg4A`
     );
     const data = await response.json();
 
@@ -47,6 +47,23 @@ const Checkout = () => {
       setLocation({
         lat: data.results[0].geometry.location.lat,
         lng: data.results[0].geometry.location.lng,
+      });
+
+      // Fetch directions using DirectionsService
+      const directionsService = new window.google.maps.DirectionsService();
+
+      const directionsRequest = {
+        origin: { lat: -20.158889, lng: 57.48083 }, // Initial location
+        destination: { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng }, // User's address
+        travelMode: window.google.maps.TravelMode.DRIVING, // You can change the travel mode as needed
+      };
+
+      directionsService.route(directionsRequest, (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          setDirections(result);
+        } else {
+          console.error(`Error fetching directions: ${status}`);
+        }
       });
     }
 
@@ -117,18 +134,20 @@ const Checkout = () => {
                 </button>
               </form>
 
-              {/* Display Google Map */}
               <LoadScript
-                googleMapsApiKey="AIzaSyDZAxPXhYG7BlyJ7tzqUU0GcxTYdQ7f4fc"
-              >
-                <GoogleMap
-                  mapContainerStyle={{ width: "100%", height: "400px" }}
-                  center={location}
-                  zoom={12}
-                >
-                  <Marker position={location} />
-                </GoogleMap>
-              </LoadScript>
+      googleMapsApiKey="AIzaSyAzgNyVeIW1BAVRmpAKUsiDjDuLt9grg4A"
+    >
+      <GoogleMap
+        mapContainerStyle={{ width: "100%", height: "400px" }}
+        center={location}
+        zoom={12}
+      >
+        <Marker position={location} />
+
+        {/* Display Directions on the map */}
+        {directions && <DirectionsRenderer directions={directions} />}
+      </GoogleMap>
+    </LoadScript>
             </Col>
 
             <Col lg="4" md="6">
