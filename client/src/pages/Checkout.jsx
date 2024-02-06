@@ -130,7 +130,7 @@ const Checkout = () => {
                   />
                 </div>
                 <button type="submit" className="addTOCart__btn">
-                  Payment
+                  Payment on Delivery
                 </button>
               </form>
 
