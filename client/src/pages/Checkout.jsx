@@ -14,15 +14,15 @@ const Checkout = () => {
   const [enterCity, setEnterCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
 
-  const shippingInfo = [];
+  const DeliveryInfo = [];
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
-  const shippingCost = 30;
+  const DeliveryCost = 30;
 
-  const totalAmount = cartTotalAmount + Number(shippingCost);
+  const totalAmount = cartTotalAmount + Number(DeliveryCost);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const userShippingAddress = {
+    const userDeliveryAddress = {
       name: enterName,
       email: enterEmail,
       phone: enterNumber,
@@ -31,8 +31,8 @@ const Checkout = () => {
       postalCode: postalCode,
     };
 
-    shippingInfo.push(userShippingAddress);
-    console.log(shippingInfo);
+    DeliveryInfo.push(userDeliveryAddress);
+    console.log(DeliveryInfo);
   };
 
   return (
@@ -42,7 +42,7 @@ const Checkout = () => {
         <Container>
           <Row>
             <Col lg="8" md="6">
-              <h6 className="mb-4">Shipping Address</h6>
+              <h6 className="mb-4">Delivery Address</h6>
               <form className="checkout__form" onSubmit={submitHandler}>
                 <div className="form__group">
                   <input
@@ -105,7 +105,7 @@ const Checkout = () => {
                   Subtotal: <span>Rs{cartTotalAmount}</span>
                 </h6>
                 <h6 className="d-flex align-items-center justify-content-between mb-3">
-                  Shipping: <span>Rs{shippingCost}</span>
+                  Delivery: <span>Rs{DeliveryCost}</span>
                 </h6>
                 <div className="checkout__total">
                   <h5 className="d-flex align-items-center justify-content-between">
