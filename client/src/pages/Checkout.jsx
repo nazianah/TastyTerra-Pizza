@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import CommonSection from "../components/UI/common-section/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
 
@@ -13,15 +14,16 @@ const Checkout = () => {
   const [enterCountry, setEnterCountry] = useState("");
   const [enterCity, setEnterCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [location, setLocation] = useState({ lat: -20.158889, lng: 57.48083 });
 
-  const DeliveryInfo = [];
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const DeliveryCost = 30;
-
   const totalAmount = cartTotalAmount + Number(DeliveryCost);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+    // Your existing code to collect user information
     const userDeliveryAddress = {
       name: enterName,
       email: enterEmail,
@@ -31,8 +33,25 @@ const Checkout = () => {
       postalCode: postalCode,
     };
 
-    DeliveryInfo.push(userDeliveryAddress);
-    console.log(DeliveryInfo);
+    // Fetch coordinates using Geocoding API
+    const address = `${enterCity}, ${enterCountry}, ${postalCode}`;
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+        address
+      )}&key=AIzaSyDZAxPXhYG7BlyJ7tzqUU0GcxTYdQ7f4fc`
+    );
+    const data = await response.json();
+
+    // Update location state with coordinates
+    if (data.results.length > 0) {
+      setLocation({
+        lat: data.results[0].geometry.location.lat,
+        lng: data.results[0].geometry.location.lng,
+      });
+    }
+
+    // Your existing code to handle user information
+    console.log(userDeliveryAddress);
   };
 
   return (
@@ -97,6 +116,19 @@ const Checkout = () => {
                   Payment
                 </button>
               </form>
+
+              {/* Display Google Map */}
+              <LoadScript
+                googleMapsApiKey="AIzaSyDZAxPXhYG7BlyJ7tzqUU0GcxTYdQ7f4fc"
+              >
+                <GoogleMap
+                  mapContainerStyle={{ width: "100%", height: "400px" }}
+                  center={location}
+                  zoom={12}
+                >
+                  <Marker position={location} />
+                </GoogleMap>
+              </LoadScript>
             </Col>
 
             <Col lg="4" md="6">
