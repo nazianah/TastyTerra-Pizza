@@ -9,7 +9,7 @@ const Dashboard = () => {
     const handleSignOut = async () => {
         try {
             // Make a request to the server to clear the token
-            const response = await fetch("http://localhost:8000/logout", {
+            const response = await fetch("https://tasty-terra-pizza-server.vercel.app/logout", {
                 method: "POST",
                 credentials: "include", // Include credentials (cookies) in the request
             });
