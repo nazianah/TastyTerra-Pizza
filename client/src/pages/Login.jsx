@@ -24,7 +24,7 @@ export default function Login() {
         toast.error(response.error);
       } else {
         setData({});
-        navigate("/");
+        navigate("/profile");
         window.location.reload();
         toast.success("Login successful!");
       }
