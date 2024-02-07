@@ -67,7 +67,7 @@ const loginUser = async (req, res) => {
         res.json({ error: 'An unexpected error occurred' });
     }
 };
-}
+
 
 const getProfile = (req, res) => {
     const {token} = req.cookies
