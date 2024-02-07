@@ -75,18 +75,21 @@ const loginUser = async (req, res) => {
 
 const getProfile = (req, res) => {
     const { token } = req.cookies;
-    if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-            if (err) {
-                console.log(err);
-                return res.status(401).json({ error: 'Unauthorized' });
-            }
-            res.json(user);
-        });
-    } else {
-        res.json(null);
+
+    if (!token) {
+        return res.status(401).json({ error: 'No token found, please log in' });
     }
-}
+
+    jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+        if (err) {
+            console.log(err);
+            return res.status(401).json({ error: 'Unauthorized, please log in again' });
+        }
+
+        res.json(user);
+    });
+};
+
 
 // Logout endpoint with token expiration
 const logoutUser = (req, res) => {
