@@ -8,7 +8,8 @@ const { test, registerUser, loginUser, getProfile, logoutUser } = require('../co
 router.use(cors(
     {
         origin: 'https://tasty-terra-pizza.vercel.app',
-        credentials: true
+        credentials: true,
+        optionsSuccessStatus: 200
     }
 ));
 
