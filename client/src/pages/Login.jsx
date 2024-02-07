@@ -1,36 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
 
-const Login = () => {
+export default function Login() {
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  
 
   const loginUser = async (e) => {
     e.preventDefault();
-
+    const { email, password } = data;
     try {
-      const { data: response } = await axios.post("https://tasty-terra-pizza-server.vercel.app/login", data);
-
+      const { data: response } = await axios.post("https://tasty-terra-pizza-server.vercel.app/login", {
+        email,
+        password,
+      });
       if (response.error) {
         toast.error(response.error);
       } else {
-        // Assuming the server returns the token in the response
-        const { token } = response;
-
-        // Store the token on the client side
-        localStorage.setItem("token", token);
-
-        setData({ ...data, password: "" });
+        setData({});
         navigate("/");
+        window.location.reload();
         toast.success("Login successful!");
       }
     } catch (error) {
-      toast.error("Error logging in. Please try again.");
+      toast.error(error.message);
     }
   };
 
@@ -75,6 +74,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}

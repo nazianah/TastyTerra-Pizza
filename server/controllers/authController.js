@@ -92,10 +92,10 @@ const getProfile = (req, res) => {
 
 
 // Logout endpoint with token expiration
-const logoutUser = (req, res) => {
-    // Clear the token cookie and set it to expire immediately
-    res.clearCookie('token', { expires: new Date(0) }).json({ message: 'Logged out successfully' });
-};
+// const logoutUser = (req, res) => {
+//     // Clear the token cookie and set it to expire immediately
+//     res.clearCookie('token', { expires: new Date(0) }).json({ message: 'Logged out successfully' });
+// };
 
 module.exports = {
     test,
