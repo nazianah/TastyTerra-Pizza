@@ -24,8 +24,8 @@ export default function Login() {
         toast.error(response.error);
       } else {
         setData({});
-        navigate("/profile");
-        // window.location.reload();
+        navigate("/");
+        window.location.reload();
         toast.success("Login successful!");
       }
     } catch (error) {
