@@ -48,8 +48,8 @@ const loginUser = async (req, res) => {
         // Check if password is correct
         const valid = await comparePassword(password, user.password);
         if (valid) {
-            // Generate token with expiration time (e.g., 1 hour)
-            const tokenExpirySeconds = 3600;
+            // Generate token with expiration time (e.g., 1 day)
+            const tokenExpirySeconds = 86400;
             jwt.sign(
                 { email: user.email, id: user._id, name: user.name },
                 process.env.JWT_SECRET,
