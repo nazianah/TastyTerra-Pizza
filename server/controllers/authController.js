@@ -3,78 +3,95 @@ const { hashPassword, comparePassword } = require('../helpers/auth');
 const jwt = require('jsonwebtoken');
 
 const test = (req, res) => {
-    res.json('test is working')
+    res.json('Test is working');
 }
 
-//register endpoint
+// Register endpoint
 const registerUser = async (req, res) => {
     try {
-        //check name is valid
+        // Check if name is valid
         const { name, email, password } = req.body;
-        if(!name) {
-            return res.json({error: 'Name is required'})
-        };
-        //check password is valid
-        if(!password || password.length < 6) {
-            return res.json({error: 'Password is required and should be min 6 characters long'})
-        };
-        //check email is valid
-        const exist = await User.findOne({email});
-        if(exist) {
-            return res.json({error: 'Email is taken'})
-        };
-        //hash password
+        if (!name) {
+            return res.json({ error: 'Name is required' });
+        }
+        // Check if password is valid
+        if (!password || password.length < 6) {
+            return res.json({ error: 'Password is required and should be min 6 characters long' });
+        }
+        // Check if email is valid
+        const exist = await User.findOne({ email });
+        if (exist) {
+            return res.json({ error: 'Email is taken' });
+        }
+        // Hash password
         const hashedPassword = await hashPassword(password);
-        //create user in db
-        const user = await User.create({name, email, password: hashedPassword});
-       
+        // Create user in the database
+        const user = await User.create({ name, email, password: hashedPassword });
+
         return res.json(user);
 
     } catch (error) {
         console.log(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
 
-//login endpoint
+// Login endpoint
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-        // check if user exists
-        const user = await User.findOne({email});
-        if(!user) {
-            return res.json({error: 'No user found'});
-        };
-        //check if password is correct
-        const valid = await comparePassword(password, user.password);
-        if(valid) {
-            jwt.sign({email: user.email, id: user._id, name: user.name}, process.env.JWT_SECRET, {}, (err, token) => {
-                if(err) throw err;
-                res.cookie('token', token).json(user)
-            })
+        // Check if user exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.json({ error: 'No user found' });
         }
-        if(!valid) {
-            res.json({error: 'Invalid password'});
-        };
+        // Check if password is correct
+        const valid = await comparePassword(password, user.password);
+        if (valid) {
+            // Generate token with expiration time (e.g., 1 hour)
+            const tokenExpirySeconds = 3600;
+            jwt.sign(
+                { email: user.email, id: user._id, name: user.name },
+                process.env.JWT_SECRET,
+                { expiresIn: tokenExpirySeconds },
+                (err, token) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({ error: 'Internal Server Error' });
+                    }
+                    // Set the cookie and send the response
+                    res.cookie('token', token, { maxAge: tokenExpirySeconds * 1000, httpOnly: true }).json(user);
+                }
+            );
+        } else {
+            // Invalid password
+            return res.json({ error: 'Invalid password' });
+        }
     } catch (error) {
         console.log(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
 
 const getProfile = (req, res) => {
-    const {token} = req.cookies
-    if(token) {
-        jwt.verify(token, process.env.JWT_SECRET, {} , (err, user) => {
-            if(err) throw err;
-            res.json(user)
-        })
+    const { token } = req.cookies;
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+            if (err) {
+                console.log(err);
+                return res.status(401).json({ error: 'Unauthorized' });
+            }
+            res.json(user);
+        });
     } else {
-        res.json(null)
+        res.json(null);
     }
 }
 
-//logoutendpoint
+// Logout endpoint with token expiration
 const logoutUser = (req, res) => {
-    res.clearCookie('token').json({ message: 'Logged out successfully' });
+    // Clear the token cookie and set it to expire immediately
+    res.clearCookie('token', { expires: new Date(0) }).json({ message: 'Logged out successfully' });
 };
 
 module.exports = {
@@ -83,5 +100,4 @@ module.exports = {
     loginUser,
     getProfile,
     logoutUser,
-    
-}
+};
