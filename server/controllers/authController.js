@@ -57,7 +57,8 @@ const loginUser = async (req, res) => {
                 }
 
                 // set the token in a cookie and respond with user data
-                res.cookie('token', token).json(user);
+                // res.cookie('token', token).json(user);
+                res.cookie('token', token, { httpOnly: true, expires: new Date(Date.now() + 86400000) }).json(user);
             });
         } else {
             res.json({ error: 'Invalid password' });
