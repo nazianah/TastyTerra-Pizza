@@ -11,12 +11,7 @@ mongoose.connect(process.env.MONGO_URL)
 .catch(err => console.log(err, 'MongoDB Connection Error'));
 
 //middleware
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://tasty-terra-pizza.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-  });
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
