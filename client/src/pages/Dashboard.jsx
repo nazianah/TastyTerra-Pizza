@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import userContext, { UserContextProvider } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const Dashboard = () => {
     const { user, setUser } = useContext(userContext);
@@ -9,13 +10,12 @@ const Dashboard = () => {
     const handleSignOut = async () => {
         try {
             // Make a request to the server to clear the token
-            const response = await fetch("/logout", {
-                method: "POST",
-                credentials: "include", // Include credentials (cookies) in the request
+            const response = await axios.post("/logout", null, {
+                withCredentials: true, // Include credentials (cookies) in the request
             });
 
             // Handle the response as needed (redirect, update UI, etc.)
-            if (response.ok) {
+            if (response.status === 200) {
                 // Handle successful logout
                 setUser(null);
                 // navigate('/login');
