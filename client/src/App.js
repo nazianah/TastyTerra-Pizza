@@ -3,7 +3,7 @@ import axios from "axios";
 import { UserContextProvider } from './context/userContext';
 import { Toaster } from 'react-hot-toast';
 
-axios.defaults.baseURL = 'https://tasty-terra-pizza-server.vercel.app/';
+axios.defaults.baseURL = 'https://tasty-terra-pizza-server.vercel.app';
 axios.defaults.withCredentials = true;
 
 function App() {
