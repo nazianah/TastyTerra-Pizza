@@ -7,7 +7,7 @@ const { test, registerUser, loginUser, getProfile, logoutUser } = require('../co
 //middleware
 router.use(cors(
     {
-        origin: 'https://tasty-terra-pizza-mysn.vercel.app/',
+        origin: 'https://tasty-terra-pizza.vercel.app/',
         credentials: true
     }
 ));
