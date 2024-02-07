@@ -70,16 +70,29 @@ const loginUser = async (req, res) => {
 
 
 const getProfile = (req, res) => {
-    const {token} = req.cookies
-    if(token) {
-        jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-            if(err) throw err;
-            res.json(user)
-        })
+    const { token } = req.cookies;
+
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+            if (err) {
+                console.error(err);
+                // Handle specific JWT errors and respond accordingly
+                if (err.name === 'TokenExpiredError') {
+                    return res.status(401).json({ error: 'Token expired' });
+                } else if (err.name === 'JsonWebTokenError') {
+                    return res.status(401).json({ error: 'Invalid token' });
+                } else {
+                    return res.status(500).json({ error: 'Internal server error' });
+                }
+            }
+
+            res.json(user);
+        });
     } else {
-        res.json(null)
+        res.json(null);
     }
-}
+};
+
 
 //logoutendpoint
 const logoutUser = (req, res) => {
