@@ -19,7 +19,7 @@ const Dashboard = () => {
                 // Handle successful logout
                 setUser(null);
                 // navigate('/login');
-                window.location.reload();
+                // window.location.reload();
                 toast.success("Logout successful");
             } else {
                 // Handle logout failure
