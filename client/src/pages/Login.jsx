@@ -16,7 +16,7 @@ export default function Login() {
     e.preventDefault();
     const { email, password } = data;
     try {
-      const { data: response } = await axios.post("/login", {
+      const { data: response } = await axios.post("https://tasty-terra-pizza-server.vercel.app/login", {
         email,
         password,
       });
