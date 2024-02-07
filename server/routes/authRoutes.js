@@ -5,13 +5,9 @@ const { test, registerUser, loginUser, getProfile, logoutUser } = require('../co
 
 
 //middleware
-router.use(cors(
-    {
-        origin: 'http://tasty-terra-pizza.vercel.app',
-        credentials: true,
-        optionsSuccessStatus: 200
-    }
-));
+router.use(cors({
+        origin: '*'
+    }))
 
 router.get("/", test)
 router.post("/register", registerUser)
