@@ -39,25 +39,34 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
+
         // check if user exists
-        const user = await User.findOne({email});
-        if(!user) {
-            return res.json({error: 'No user found'});
-        };
-        //check if password is correct
-        const valid = await comparePassword(password, user.password);
-        if(valid) {
-            jwt.sign({email: user.email, id: user._id, name: user.name}, process.env.JWT_SECRET, {}, (err, token) => {
-                if(err) throw err;
-                res.cookie('token', token).json(user)
-            })
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.json({ error: 'No user found' });
         }
-        if(!valid) {
-            res.json({error: 'Invalid password'});
-        };
+
+        // check if password is correct
+        const valid = await comparePassword(password, user.password);
+        if (valid) {
+            // generate JWT token
+            jwt.sign({ email: user.email, id: user._id, name: user.name }, process.env.JWT_SECRET, {}, (err, token) => {
+                if (err) {
+                    console.error(err);
+                    return res.json({ error: 'Error generating token' });
+                }
+
+                // set the token in a cookie and respond with user data
+                res.cookie('token', token).json(user);
+            });
+        } else {
+            res.json({ error: 'Invalid password' });
+        }
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        res.json({ error: 'An unexpected error occurred' });
     }
+};
 }
 
 const getProfile = (req, res) => {
