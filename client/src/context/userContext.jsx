@@ -15,7 +15,7 @@ export const UserContextProvider = ({ children }) => {
     // Simulate an asynchronous authentication check
     const fakeAuthenticationCheck = async () => {
       try {
-        const response = await axios.get('/profile');
+        const response = await axios.get('https://tasty-terra-pizza-server.vercel.app/profile');
         setUser(response.data);
       } catch (error) {
         console.error('Authentication check failed:', error.message);
