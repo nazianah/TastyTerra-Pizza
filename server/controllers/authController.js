@@ -39,72 +39,68 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-
         // check if user exists
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.json({ error: 'No user found' });
-        }
-
-        // check if password is correct
+        const user = await User.findOne({email});
+        if(!user) {
+            return res.json({error: 'No user found'});
+        };
+        //check if password is correct
         const valid = await comparePassword(password, user.password);
-        if (valid) {
-            // generate JWT token
-            jwt.sign({ email: user.email, id: user._id, name: user.name }, process.env.JWT_SECRET, {}, (err, token) => {
-                if (err) {
-                    console.error(err);
-                    return res.json({ error: 'Error generating token' });
-                }
-
-                // set the token in a cookie and respond with user data
-                // res.cookie('token', token).json(user);
-                res.cookie('token', token, { httpOnly: true, expires: new Date(Date.now() + 86400000) }).json(user);
-            });
-        } else {
-            res.json({ error: 'Invalid password' });
+        if(valid) {
+            jwt.sign({email: user.email, id: user._id, name: user.name}, process.env.JWT_SECRET, {}, (err, token) => {
+                if(err) throw err;
+                res.cookie('token', token).json(user)
+            })
         }
+        if(!valid) {
+            res.json({error: 'Invalid password'});
+        };
     } catch (error) {
-        console.error(error);
-        res.json({ error: 'An unexpected error occurred' });
+        console.log(error);
     }
-};
-
+}
 
 const getProfile = (req, res) => {
-    const { token } = req.cookies;
-
-    if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-            if (err) {
-                console.error(err);
-                // Handle specific JWT errors and respond accordingly
-                if (err.name === 'TokenExpiredError') {
-                    return res.status(401).json({ error: 'Token expired' });
-                } else if (err.name === 'JsonWebTokenError') {
-                    return res.status(401).json({ error: 'Invalid token' });
-                } else {
-                    return res.status(500).json({ error: 'Internal server error' });
-                }
-            }
-
-            res.json(user);
-        });
+    const {token} = req.cookies
+    if(token) {
+        jwt.verify(token, process.env.JWT_SECRET, {} , (err, user) => {
+            if(err) throw err;
+            res.json(user)
+        })
     } else {
-        res.json(null);
+        res.json(null)
     }
-};
-
+}
 
 //logoutendpoint
 const logoutUser = (req, res) => {
     res.clearCookie('token').json({ message: 'Logged out successfully' });
 };
 
+//reset password endpoint
+const resetPassword = async (req, res) => {
+    try {
+        const { email, newPassword } = req.body;
+        // check if user exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.json({ error: 'No user found' });
+        }
+        // hash new password
+        const hashedPassword = await hashPassword(newPassword);
+        // update user's password in the database
+        await User.findByIdAndUpdate(user._id, { password: hashedPassword });
+        res.json({ message: 'Password reset successful' });
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
 module.exports = {
     test,
     registerUser,
     loginUser,
     getProfile,
     logoutUser,
-    
+    resetPassword
 }
