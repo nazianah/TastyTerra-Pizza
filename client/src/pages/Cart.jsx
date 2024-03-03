@@ -1,5 +1,4 @@
 import React from "react";
-import { navigate } from "react-router-dom";
 
 import CommonSection from "../components/UI/common-section/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
@@ -12,27 +11,6 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
-
-  // Check if user is logged in
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  // Redirect to login page if not logged in
-  React.useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/login");
-    }
-  }, [isLoggedIn]);
-
-  const dispatch = useDispatch();
-
-  const handleContinueShopping = () => {
-    navigate("/foods");
-  };
-
-  const handleProceedToCheckout = () => {
-    navigate("/checkout");
-  };
-
   return (
     <Helmet title="Cart">
       <CommonSection title="Your Cart" />
@@ -66,12 +44,13 @@ const Cart = () => {
                   Subtotal: Rs
                   <span className="cart__subtotal">{totalAmount}</span>
                 </h6>
+                {/* <p>Taxes and Delivery will calculate at checkout</p> */}
                 <div className="cart__page-btn">
-                  <button className="addTOCart__btn me-4" onClick={handleContinueShopping}>
-                    Continue Shopping
+                  <button className="addTOCart__btn me-4">
+                    <Link to="/foods">Continue Shopping</Link>
                   </button>
-                  <button className="addTOCart__btn" onClick={handleProceedToCheckout}>
-                    Proceed to checkout
+                  <button className="addTOCart__btn">
+                    <Link to="/checkout">Proceed to checkout</Link>
                   </button>
                 </div>
               </div>
@@ -90,7 +69,6 @@ const Tr = (props) => {
   const deleteItem = () => {
     dispatch(cartActions.deleteItem(id));
   };
-
   return (
     <tr>
       <td className="text-center cart__img-box">
@@ -100,7 +78,7 @@ const Tr = (props) => {
       <td className="text-center">Rs{price}</td>
       <td className="text-center">{quantity}px</td>
       <td className="text-center cart__item-del">
-        <i className="ri-delete-bin-line" onClick={deleteItem}></i>
+        <i class="ri-delete-bin-line" onClick={deleteItem}></i>
       </td>
     </tr>
   );
