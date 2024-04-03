@@ -33,7 +33,7 @@ let products = [];
 
 async function fetchProducts() {
   try {
-    const response = await fetch('http://localhost:8000/products');
+    const response = await fetch('https://tasty-terra-pizza-server-phi.vercel.app/products');
     const data = await response.json();
     products = data;
     console.log('Fetched products:', products);
