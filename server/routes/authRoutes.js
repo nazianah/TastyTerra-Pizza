@@ -8,7 +8,8 @@ const Product = require('../models/product');
 router.use(cors(
     {
         origin: 'https://tasty-terra-pizza-vert.vercel.app/',
-        credentials: true
+        credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
     }
 ));
 
