@@ -85,11 +85,45 @@ const logoutUser = (req, res) => {
     res.clearCookie('token').json({ message: 'Logged out successfully' });
 };
 
+//createproduct endpoint
+const createProduct = async (req, res) => {
+    try {
+      // Extract product data from the request body
+      const { title, price, image01, image02, image03, category, desc } = req.body;
+  
+      // Validate the incoming data
+      if (!title || !price || !image01 || !image02 || !image03 || !category || !desc) {
+        return res.status(400).json({ message: "Please provide all required fields." });
+      }
+  
+      // Create a new product instance
+      const newProduct = {
+        title,
+        price,
+        image01,
+        image02,
+        image03,
+        category,
+        desc
+      };
+  
+      // Save the new product to the database using your productService or database ORM
+      await productService.createProduct(newProduct);
+  
+      res.status(201).json({ message: "Product created successfully.", product: newProduct });
+    } catch (error) {
+      console.error("Error creating product:", error);
+      res.status(500).json({ message: "Internal server error." });
+    }
+  };
+  
+
 module.exports = {
     test,
     registerUser,
     loginUser,
     getProfile,
     logoutUser,
+    createProduct
     
 }
