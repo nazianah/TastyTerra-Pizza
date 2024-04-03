@@ -5,13 +5,7 @@ const { test, registerUser, loginUser, getProfile, logoutUser } = require('../co
 const Product = require('../models/product');
 
 //middleware
-router.use(cors(
-    {
-        origin: 'https://tasty-terra-pizza-vert.vercel.app/',
-        credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    }
-));
+router.use(cors());
 
 router.get("/", test)
 router.post("/register", registerUser)
