@@ -7,12 +7,11 @@ const product = require('../models/product')
 
 
 //middleware
-router.use(cors(
-    {
-        origin: 'https://tasty-terra-pizza-vert.vercel.app/',
-        credentials: true
-    }
-));
+const origin = process.env.VERCEL_URL || 'https://tasty-terra-pizza-vert.vercel.app/';
+router.use(cors({
+  origin,
+  credentials: true
+}));
 
 router.get("/", test)
 router.post("/register", registerUser)
