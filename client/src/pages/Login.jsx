@@ -23,15 +23,28 @@ export default function Login() {
       if (response.error) {
         toast.error(response.error);
       } else {
-        setData({});
+        // Reset input fields
+        setData({ email: "", password: "" });
+        // Redirect to home page
         navigate("/");
-        window.location.reload();
+        // Show success message
         toast.success("Login successful!");
       }
     } catch (error) {
-      toast.error(error.message);
+      // Handle different types of errors
+      if (error.response) {
+        // Server responded with an error status code
+        toast.error(error.response.data.message);
+      } else if (error.request) {
+        // Request made but no response received
+        toast.error("Network error. Please try again later.");
+      } else {
+        // Something happened in setting up the request
+        toast.error("An unexpected error occurred.");
+      }
     }
   };
+  
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>

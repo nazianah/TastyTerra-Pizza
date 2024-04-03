@@ -16,7 +16,7 @@ import featureImg01 from "../assets/images/service-01.png";
 import featureImg02 from "../assets/images/service-02.png";
 import featureImg03 from "../assets/images/service-03.png";
 
-import products from "../assets/fake-data/products.js";
+// import products from "../assets/fake-data/products.js";
 
 import foodCategoryImg01 from "../assets/images/hamburger.png";
 import foodCategoryImg02 from "../assets/images/pizza.png";
@@ -29,6 +29,29 @@ import whyImg from "../assets/images/location.png";
 import networkImg from "../assets/images/network.png";
 
 import TestimonialSlider from "../components/UI/slider/TestimonialSlider.jsx";
+let products = [];
+
+async function fetchProducts() {
+  try {
+    const response = await fetch('https://tasty-terra-pizza-server-phi.vercel.app//products');
+    const data = await response.json();
+    products = data;
+    // console.log('Fetched products:', products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+}
+
+// Call fetchProducts to get the products asynchronously
+fetchProducts()
+  .catch(error => {
+    // Handle errors if any
+    console.error('Error:', error);
+  });
+
+// Export the products array
+
 
 const featureData = [
   {
@@ -62,35 +85,25 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (category === "ALL") {
-      setAllProducts(products);
-    }
-
-    if (category === "BURGER") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Burger"
-      );
-
-      setAllProducts(filteredProducts);
-    }
-
-    if (category === "PIZZA") {
-      const filteredProducts = products.filter(
-        (item) => item.category === "Pizza"
-      );
-
-      setAllProducts(filteredProducts);
-    }
-
-    // if (category === "BREAD") {
-    //   const filteredProducts = products.filter(
-    //     (item) => item.category === "Bread"
-    //   );
-
-    //   setAllProducts(filteredProducts);
-    // }
+    const timeoutId = setTimeout(() => {
+      if (category === "ALL") {
+        setAllProducts(products);
+      } else if (category === "BURGER") {
+        const filteredProducts = products.filter(
+          (item) => item.category === "Burger"
+        );
+        setAllProducts(filteredProducts);
+      } else if (category === "PIZZA") {
+        const filteredProducts = products.filter(
+          (item) => item.category === "Pizza"
+        );
+        setAllProducts(filteredProducts);
+      }
+    }, 1000); // 1000 milliseconds = 1 second
+  
+    return () => clearTimeout(timeoutId);
   }, [category]);
-
+  
   return (
     <Helmet title="Home">
       <section>

@@ -84,6 +84,9 @@ const getProfile = (req, res) => {
 const logoutUser = (req, res) => {
     res.clearCookie('token').json({ message: 'Logged out successfully' });
 };
+//proucts
+
+
 
 module.exports = {
     test,
